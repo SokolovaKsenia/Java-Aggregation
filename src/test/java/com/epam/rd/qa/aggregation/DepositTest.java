@@ -1,14 +1,20 @@
 package com.epam.rd.qa.aggregation;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.epam.rd.qa.aggregation.Util.executableMap;
+import static com.epam.rd.qa.aggregation.Util.nextInt;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DepositTest {
 
@@ -53,33 +59,26 @@ class DepositTest {
         );
     }
 
-    @Test
-    void testCompareTo() {
-        assertEquals(0, new LongDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new LongDeposit(new BigDecimal("0.00001"), 2)));
-        assertEquals(0, new SpecialDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new SpecialDeposit(new BigDecimal("0.00001"), 2)));
-        assertEquals(0, new SpecialDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new LongDeposit(new BigDecimal("0.00001"), 2)));
-        assertEquals(0, new LongDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new SpecialDeposit(new BigDecimal("0.00001"), 2)));
+    @ParameterizedTest
+    @MethodSource("casesDepositIncome")
+    void testDepositIncome(Deposit deposit, String expectedIncome) {
+        assertEquals(new BigDecimal(expectedIncome), deposit.income());
+    }
 
-        assertTrue(new LongDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new LongDeposit(new BigDecimal("0.000001"), 2)) > 0);
-        assertTrue(new SpecialDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new SpecialDeposit(new BigDecimal("0.000001"), 2)) > 0);
-        assertTrue(new LongDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new SpecialDeposit(new BigDecimal("0.000001"), 2)) > 0);
-        assertTrue(new SpecialDeposit(new BigDecimal("0.00001"), 1)
-                .compareTo(new LongDeposit(new BigDecimal("0.000001"), 2)) > 0);
-
-        assertTrue(new LongDeposit(new BigDecimal("0.000001"), 1)
-                .compareTo(new LongDeposit(new BigDecimal("0.00001"), 2)) < 0);
-        assertTrue(new SpecialDeposit(new BigDecimal("0.000001"), 1)
-                .compareTo(new SpecialDeposit(new BigDecimal("0.00001"), 2)) < 0);
-        assertTrue(new LongDeposit(new BigDecimal("0.000001"), 1)
-                .compareTo(new SpecialDeposit(new BigDecimal("0.00001"), 2)) < 0);
-        assertTrue(new SpecialDeposit(new BigDecimal("0.000001"), 1)
-                .compareTo(new LongDeposit(new BigDecimal("0.00001"), 2)) < 0);
+    static Stream<Arguments> casesDepositIncome() {
+        Random r = new Random(321);
+        Collection<String> values = List.of("551.32", "276.28", "215.50", "477.45", "50.00", "340.09", "477.45", "551.32", "340.09", "551.32", "228.25", "228.25", "61.10", "547.11", "61.10", "10.00", "10.00", "314.22", "103.55", "419.36", "1000", "1000", "322.50", "1000", "322.50", "1000", "1000", "1000", "150.00", "1000");
+        Iterator<String> it = values.iterator();
+        Stream<Arguments> baseDeposits = Stream.generate(() -> Arguments.of(executableMap.get(0)
+                        .execute(new BigDecimal("1000"), nextInt(r, 1, 10)), it.next()))
+                .limit(10);
+        Stream<Arguments> specialDeposits = Stream.generate(() -> Arguments.of(executableMap.get(1)
+                        .execute(new BigDecimal("1000"), nextInt(r, 1, 10)), it.next()))
+                .limit(10);
+        Stream<Arguments> longDeposits = Stream.generate(() -> Arguments.of(executableMap.get(2)
+                        .execute(new BigDecimal("1000"), nextInt(r, 1, 10)), it.next()))
+                .limit(10);
+        Stream<Arguments> concat = Stream.concat(baseDeposits, specialDeposits);
+        return Stream.concat(concat, longDeposits);
     }
 }

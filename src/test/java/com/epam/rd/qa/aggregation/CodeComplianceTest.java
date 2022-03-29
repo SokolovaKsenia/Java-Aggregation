@@ -35,16 +35,6 @@ class CodeComplianceTest {
         assertTrue(Modifier.isProtected(constructor.getModifiers()),
                 "The constructor should be protected");
 
-        Class<?>[] depositClassInterfaces = depositClass.getInterfaces();
-        assertEquals(1, depositClassInterfaces.length,
-                "'Deposit' class should implement only 'Comparable' interface");
-
-        Optional<Class<?>> comparableOpt = Arrays.stream(depositClassInterfaces)
-                .filter(iFace -> iFace.getName().equals("java.lang.Comparable"))
-                .findAny();
-        assertTrue(comparableOpt.isPresent(),
-                "'Deposit' class should implement 'Comparable<Deposit>' interface");
-
         Field[] declaredFields = depositClass.getDeclaredFields();
         assertEquals(2, declaredFields.length);
 
