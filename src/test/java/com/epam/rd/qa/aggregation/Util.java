@@ -20,7 +20,6 @@ public class Util {
         return Stream.generate(() -> executableMap.get(nextInt(classRandom, 0, 3))
                         .execute(new BigDecimal(nextInt(r, 500, 2000)), nextInt(r, 3, 12)))
                 .limit(limit);
-//                .peek(System.out::println);
     }
 
     static int nextInt(Random r, int origin, int bound) {

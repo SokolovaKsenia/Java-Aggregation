@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 
 import static com.epam.rd.qa.aggregation.Util.executableMap;
 import static com.epam.rd.qa.aggregation.Util.nextInt;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DepositTest {
@@ -67,7 +66,7 @@ class DepositTest {
 
     static Stream<Arguments> casesDepositIncome() {
         Random r = new Random(321);
-        Collection<String> values = List.of("551.32", "276.28", "215.50", "477.45", "50.00", "340.09", "477.45", "551.32", "340.09", "551.32", "228.25", "228.25", "61.10", "547.11", "61.10", "10.00", "10.00", "314.22", "103.55", "419.36", "1000", "1000", "322.50", "1000", "322.50", "1000", "1000", "1000", "150.00", "1000");
+        Collection<String> values = List.of("551.32", "276.28", "215.50", "477.45", "50.00", "340.09", "477.45", "551.32", "340.09", "551.32", "228.25", "228.25", "61.10", "547.11", "61.10", "10.00", "10.00", "314.22", "103.55", "419.36", "0.00", "0.00", "322.50", "0.00", "322.50", "0.00", "0.00", "0.00", "150.00", "0.00");
         Iterator<String> it = values.iterator();
         Stream<Arguments> baseDeposits = Stream.generate(() -> Arguments.of(executableMap.get(0)
                         .execute(new BigDecimal("1000"), nextInt(r, 1, 10)), it.next()))

@@ -68,10 +68,10 @@ class ClientTest {
         Random r = new Random(13);
         return Stream.of(
                 Arguments.of(ClientFactory.newInstance(
-                        generateDeposits(7, 5).toArray(Deposit[]::new)), "7647.21", "1987",
+                        generateDeposits(7, 5).toArray(Deposit[]::new)), "3829.21", "1875.05",
                         nextInt(r, 0, 10), "511.74"),
                 Arguments.of(ClientFactory.newInstance(
-                        generateDeposits(5, 2347).toArray(Deposit[]::new)), "2736.26", "1505.91",
+                        generateDeposits(5, 2347).toArray(Deposit[]::new)), "2040.26", "1505.91",
                         nextInt(r, 0, 10), "1505.91"),
                 Arguments.of(ClientFactory.newInstance(
                         generateDeposits(5, 748).toArray(Deposit[]::new)), "2072.88", "610.85",
@@ -80,7 +80,7 @@ class ClientTest {
                         generateDeposits(5, 12).toArray(Deposit[]::new)), "2070.36", "790.95",
                         nextInt(r, 0, 10), "0.00"),
                 Arguments.of(ClientFactory.newInstance(
-                        generateDeposits(12, 15).toArray(Deposit[]::new)), "5706.04", "1527",
+                        generateDeposits(12, 15).toArray(Deposit[]::new)), "2576.04", "728.88",
                         nextInt(r, 0, 10), "728.88")
         );
     }

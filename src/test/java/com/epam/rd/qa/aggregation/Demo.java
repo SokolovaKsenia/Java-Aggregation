@@ -8,7 +8,7 @@ public class Demo {
         System.out.println(baseDeposit.income());
         Deposit specialDeposit = new SpecialDeposit(new BigDecimal("1000"), 4);
         System.out.println(specialDeposit.income());
-        Deposit longDeposit = new LongDeposit(new BigDecimal("1000"), 8);
+        Deposit longDeposit = new LongDeposit(new BigDecimal("1000"), 5);
         System.out.println(longDeposit.income());
     }
 }
