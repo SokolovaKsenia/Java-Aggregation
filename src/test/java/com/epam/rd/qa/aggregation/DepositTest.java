@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 
 import static com.epam.rd.qa.aggregation.Util.executableMap;
 import static com.epam.rd.qa.aggregation.Util.nextInt;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DepositTest {
 
