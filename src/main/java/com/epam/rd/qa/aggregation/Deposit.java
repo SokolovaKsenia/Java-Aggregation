@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.NoSuchElementException;
 
 public abstract class Deposit {
-    protected BigDecimal amount;
+    protected final BigDecimal amount;
     protected final int period;
 
     protected Deposit(BigDecimal depositAmount, int depositPeriod) {
@@ -33,7 +33,7 @@ public abstract class Deposit {
 
     @Override
     public String toString() {
-        return "Deposit{" + "amount=" + amount + ", period=" + period + ", totalamount=" + this.amount.add(income()) + "}";
+        return "Deposit{" + "amount=" + amount + ", period=" + period + ", total amount=" + this.amount.add(income()) + "}";
     }
 
     @Override
