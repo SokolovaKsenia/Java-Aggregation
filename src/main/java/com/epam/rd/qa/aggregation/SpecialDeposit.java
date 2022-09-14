@@ -17,3 +17,4 @@ public class SpecialDeposit extends Deposit {
         return sum.subtract(amount).setScale(2, RoundingMode.FLOOR);
     }
 }
+

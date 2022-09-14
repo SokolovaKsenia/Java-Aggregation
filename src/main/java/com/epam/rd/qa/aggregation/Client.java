@@ -56,3 +56,5 @@ public class Client {
         else return BigDecimal.valueOf(0).setScale(2);
     }
 }
+
+

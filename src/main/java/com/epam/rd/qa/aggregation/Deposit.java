@@ -43,7 +43,6 @@ public abstract class Deposit {
         Deposit deposit = (Deposit) o;
         return period == deposit.period && Objects.equals(amount, deposit.amount);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(amount, period);

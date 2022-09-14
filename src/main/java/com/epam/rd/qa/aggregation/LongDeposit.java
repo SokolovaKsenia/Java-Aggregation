@@ -7,7 +7,6 @@ public class LongDeposit extends Deposit {
     public LongDeposit(BigDecimal amount, int period) {
         super(amount, period);
     }
-
     BigDecimal income() {
         BigDecimal sum = amount;
         if (period > 0) {
